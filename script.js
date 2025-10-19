@@ -1,5 +1,6 @@
 // API配置
-const API_BASE_URL = "http://60.28.106.46:15025"; // 根据你的API服务地址修改
+// 使用相对路径，自动适应当前域名
+const API_BASE_URL = '';
 
 // 全局变量
 let selectedFile = null;
@@ -197,7 +198,13 @@ async function analyzeImage() {
         
     } catch (error) {
         console.error('分析错误:', error);
-        showError('网络错误或服务不可用，请检查API服务是否启动');
+        const errorMsg = error.message || '网络错误';
+        // 检查是否是混合内容错误
+        if (window.location.protocol === 'https:' && API_BASE_URL.startsWith('http:')) {
+            showError('安全连接失败。请尝试使用 HTTP 访问网站：' + window.location.href.replace('https:', 'http:'));
+        } else {
+            showError('网络错误或服务不可用：' + errorMsg);
+        }
     }
 }
 
