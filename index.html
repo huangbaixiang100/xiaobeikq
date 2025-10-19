@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="小北儿童口腔疾病识别系统">
+    <title>小北儿童口腔疾病识别</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🦷 小北口腔检测</h1>
+            <ul class="nav-menu">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#upload">上传检测</a></li>
+                <li><a href="#about">关于系统</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主页部分 -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2 class="hero-title">AI智能口腔检测</h2>
+            <p class="hero-subtitle">专业识别儿童乳牙滞留等口腔疾病</p>
+            <button class="btn-primary" onclick="scrollToSection('upload')">开始检测</button>
+        </div>
+        <div class="hero-image">
+            <div class="floating-card">
+                <div class="card-icon">🩺</div>
+                <h3>专业</h3>
+                <p>AI智能诊断</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 上传检测部分 -->
+    <section id="upload" class="upload-section">
+        <div class="container">
+            <h2 class="section-title">口腔图像检测</h2>
+            
+            <!-- 上传区域 -->
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-content">
+                    <div class="upload-icon">📷</div>
+                    <h3>上传口腔图像</h3>
+                    <p>支持 JPG、PNG 格式，建议图像清晰、光线充足</p>
+                    <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                    <button class="btn-secondary" onclick="console.log('按钮点击'); document.getElementById('imageInput').click()">
+                        选择图片
+                    </button>
+                </div>
+            </div>
+
+            <!-- 图片预览 -->
+            <div id="imagePreview" class="image-preview" style="display: none;">
+                <h3>图片预览</h3>
+                <div class="preview-container">
+                    <img id="previewImage" alt="预览图片">
+                    <div class="preview-actions">
+                        <button class="btn-primary" onclick="analyzeImage()">开始分析</button>
+                        <button class="btn-secondary" onclick="resetUpload()">重新选择</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 加载状态 -->
+            <div id="loadingState" class="loading-state" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>正在分析图像，请稍候...</p>
+            </div>
+
+            <!-- 分析结果 -->
+            <div id="analysisResult" class="analysis-result" style="display: none;">
+                <h3>分析结果</h3>
+                <div class="result-content">
+                    <div class="result-summary">
+                        <div class="result-item">
+                            <span class="label">检测结果：</span>
+                            <span id="classification" class="classification"></span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">置信度：</span>
+                            <span id="confidence" class="confidence"></span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">图片质量：</span>
+                            <span id="qualityAssessment" class="quality"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="result-images">
+                        <div class="image-container">
+                            <h4>检测到的口腔区域</h4>
+                            <img id="mouthImage" alt="检测到的口腔区域">
+                        </div>
+                    </div>
+
+                    <div class="recommendations">
+                        <h4>专业建议</h4>
+                        <ul id="recommendationsList"></ul>
+                    </div>
+
+                    <div class="quality-details">
+                        <h4>图片质量详情</h4>
+                        <div class="quality-metrics">
+                            <div class="metric">
+                                <span class="metric-label">清晰度：</span>
+                                <span id="sharpness" class="metric-value"></span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">曝光度：</span>
+                                <span id="exposure" class="metric-value"></span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">图片已保存：</span>
+                                <span id="imageSaved" class="metric-value"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 错误提示 -->
+            <div id="errorMessage" class="error-message" style="display: none;">
+                <div class="error-icon">⚠️</div>
+                <p id="errorText"></p>
+                <button class="btn-secondary" onclick="resetUpload()">重新上传</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于部分 -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">关于系统</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>AI驱动的口腔健康检测</h3>
+                    <p>本系统采用先进的深度学习技术，专门用于识别儿童口腔疾病，特别是乳牙滞留问题。通过上传口腔图像，系统能够快速、准确地进行分析诊断。</p>
+                    <p>系统具备图片质量检测功能，确保分析结果的准确性。所有上传的图片都会安全保存，用于持续改进模型性能。</p>
+                    
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">🎯</span>
+                            <div>
+                                <h4>精准识别</h4>
+                                <p>基于大量临床数据训练，识别准确率高</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">⚡</span>
+                            <div>
+                                <h4>快速分析</h4>
+                                <p>几秒钟内完成图像分析和结果输出</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔒</span>
+                            <div>
+                                <h4>数据安全</h4>
+                                <p>严格保护用户隐私，数据加密传输</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <span class="placeholder-icon">🦷</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系部分 -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">联系我们</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>技术支持</h3>
+                    <p>如果您在使用过程中遇到任何问题，或对系统有任何建议，请随时联系我们。</p>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <span class="method-icon">📧</span>
+                            <span>support@xiaobei-dental.com</span>
+                        </div>
+                        <div class="contact-method">
+                            <span class="method-icon">📞</span>
+                            <span>400-123-4567</span>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="您的姓名" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="您的邮箱" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" rows="5" placeholder="留言内容" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">发送消息</button>
+                </form>
+            </div>
+            <div id="formMessage" class="form-message"></div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 小北儿童口腔疾病识别系统. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="GitHub">🔗</a>
+                <a href="#" aria-label="Email">📧</a>
+                <a href="#" aria-label="Phone">📞</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
