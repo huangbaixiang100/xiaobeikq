@@ -6,5 +6,11 @@
       "methods": ["POST", "OPTIONS"],
       "dest": "/api/analyze.js"
     }
-  ]
+  ],
+  "functions": {
+    "api/analyze.js": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  }
 }

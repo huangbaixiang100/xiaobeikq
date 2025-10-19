@@ -173,10 +173,10 @@ async function analyzeImage() {
         const formData = new FormData();
         formData.append('file', selectedFile);
         
-        console.log('正在上传图片到:', `${API_BASE_URL}/api/v1/analyze?save_image_flag=true`);
+        console.log('正在上传图片到:', `/api/analyze?save_image_flag=true`);
         
         // 调用API进行分析
-        const response = await fetch(`${API_BASE_URL}/api/v1/analyze?save_image_flag=true`, {
+        const response = await fetch(`/api/analyze?save_image_flag=true`, {
             method: 'POST',
             body: formData
         });

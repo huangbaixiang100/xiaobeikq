@@ -1,5 +1,6 @@
 // Vercel Serverless Function
 const fetch = require('node-fetch');
+const FormData = require('form-data');
 
 module.exports = async (req, res) => {
   // 设置CORS头
@@ -27,13 +28,23 @@ module.exports = async (req, res) => {
     const save_image_flag = req.query.save_image_flag === 'true';
     const apiUrl = `${API_URL}?save_image_flag=${save_image_flag}`;
 
+    // 创建新的 FormData
+    const formData = new FormData();
+    
+    // 从请求中获取文件数据
+    if (!req.body || !req.body.file) {
+      res.status(400).json({ error: 'No file provided' });
+      return;
+    }
+
+    // 添加文件到 FormData
+    formData.append('file', req.body.file);
+
     // 转发请求
     const response = await fetch(apiUrl, {
       method: 'POST',
-      body: req.body,
-      headers: {
-        'Content-Type': req.headers['content-type']
-      }
+      body: formData,
+      headers: formData.getHeaders()
     });
 
     // 获取响应数据
