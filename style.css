@@ -6,12 +6,12 @@
 }
 
 :root {
-    --primary-color: #2E7D32;
-    --secondary-color: #4CAF50;
-    --accent-color: #81C784;
+    --primary-color: #F57C00;
+    --secondary-color: #FFB300;
+    --accent-color: #FFD54F;
     --text-dark: #1f2937;
     --text-light: #6b7280;
-    --bg-light: #f8f9fa;
+    --bg-light: #FFFDF7;
     --white: #ffffff;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
@@ -112,7 +112,7 @@ html {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 100%);
+    background: linear-gradient(135deg, #F57C00 0%, #FFB300 100%);
     padding: 100px 20px 50px;
     position: relative;
     overflow: hidden;
@@ -134,6 +134,7 @@ html {
     flex: 1;
     color: var(--white);
     z-index: 1;
+    padding-left: 2rem;
 }
 
 .hero-title {
@@ -179,6 +180,71 @@ html {
 
 .floating-card p {
     color: var(--text-light);
+}
+
+.hero-text-content {
+    background: var(--white);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    max-width: 500px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.hero-text-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.hero-text-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.hero-text-content p:last-child {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+/* Logo区域样式 */
+.logo-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 2rem 0 0 0;
+    animation: fadeInUp 1s ease 0.6s backwards;
+}
+
+.logo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.logo-image:hover {
+    transform: scale(1.1);
+}
+
+.logo-text {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    font-weight: 500;
 }
 
 /* 按钮 */
@@ -870,5 +936,20 @@ html {
     .preview-actions {
         flex-direction: column;
         align-items: center;
+    }
+
+    .logo-section {
+        flex-direction: column;
+        gap: 1rem;
+        margin: 1.5rem 0;
+    }
+
+    .logo-image {
+        width: 70px;
+        height: 70px;
+    }
+
+    .logo-text {
+        font-size: 0.8rem;
     }
 }
