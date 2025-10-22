@@ -126,7 +126,7 @@ function showImagePreview(file) {
         console.log('显示预览区域');
         // 确保元素存在
         if (previewArea && uploadArea) {
-            previewArea.classList.add('show');
+            previewArea.style.display = 'block'; // 使用style.display而不是classList
             uploadArea.style.display = 'none';
             console.log('预览区域display:', previewArea.style.display);
             console.log('上传区域display:', uploadArea.style.display);
@@ -346,7 +346,39 @@ function resetUpload() {
     selectedFile = null;
     document.getElementById('imageInput').value = '';
     document.getElementById('uploadArea').style.display = 'block';
+    document.getElementById('imagePreview').style.display = 'none';
     hideAllStates();
+    
+    // 清除预览图片
+    const previewImage = document.getElementById('previewImage');
+    if (previewImage) {
+        previewImage.src = '';
+        previewImage.style.display = 'none';
+    }
+    
+    // 移除之前的口腔信息提示（如果存在）
+    const mouthImage = document.getElementById('mouthImage');
+    if (mouthImage && mouthImage.parentElement) {
+        const mouthInfo = mouthImage.parentElement.querySelector('.mouth-info');
+        if (mouthInfo) {
+            mouthInfo.remove();
+        }
+        mouthImage.style.display = 'none';
+    }
+    
+    // 隐藏预览区域的所有内容
+    const previewArea = document.getElementById('imagePreview');
+    if (previewArea) {
+        previewArea.style.display = 'none';
+        // 隐藏预览区域内的所有元素
+        Array.from(previewArea.getElementsByTagName('*')).forEach(element => {
+            if (element.style) {
+                element.style.display = 'none';
+            }
+        });
+    }
+    
+    console.log('重置上传状态完成');
 }
 
 // 滚动到指定部分
