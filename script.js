@@ -343,39 +343,73 @@ function hideAllStates() {
 
 // 重置上传
 function resetUpload() {
-    selectedFile = null;
-    document.getElementById('imageInput').value = '';
-    document.getElementById('uploadArea').style.display = 'block';
-    document.getElementById('imagePreview').style.display = 'none';
-    hideAllStates();
+    console.log('开始重置上传状态');
     
-    // 清除预览图片
-    const previewImage = document.getElementById('previewImage');
-    if (previewImage) {
-        previewImage.src = '';
-        previewImage.style.display = 'none';
+    // 重置文件选择
+    selectedFile = null;
+    const imageInput = document.getElementById('imageInput');
+    if (imageInput) {
+        imageInput.value = '';
     }
     
-    // 移除之前的口腔信息提示（如果存在）
+    // 显示上传区域
+    const uploadArea = document.getElementById('uploadArea');
+    if (uploadArea) {
+        uploadArea.style.display = 'block';
+        uploadArea.style.opacity = '1';
+        uploadArea.style.visibility = 'visible';
+        console.log('上传区域已显示');
+    }
+    
+    // 隐藏预览区域
+    const previewArea = document.getElementById('imagePreview');
+    if (previewArea) {
+        previewArea.style.display = 'none';
+        // 重置预览图片
+        const previewImage = document.getElementById('previewImage');
+        if (previewImage) {
+            previewImage.src = '';
+            previewImage.style.display = 'none';
+        }
+    }
+    
+    // 隐藏所有状态
+    hideAllStates();
+    
+    // 重置口腔图片和信息
     const mouthImage = document.getElementById('mouthImage');
     if (mouthImage && mouthImage.parentElement) {
+        mouthImage.src = '';
+        mouthImage.style.display = 'none';
         const mouthInfo = mouthImage.parentElement.querySelector('.mouth-info');
         if (mouthInfo) {
             mouthInfo.remove();
         }
-        mouthImage.style.display = 'none';
     }
     
-    // 隐藏预览区域的所有内容
-    const previewArea = document.getElementById('imagePreview');
-    if (previewArea) {
-        previewArea.style.display = 'none';
-        // 隐藏预览区域内的所有元素
-        Array.from(previewArea.getElementsByTagName('*')).forEach(element => {
-            if (element.style) {
-                element.style.display = 'none';
-            }
-        });
+    // 重置分析结果区域
+    const analysisResult = document.getElementById('analysisResult');
+    if (analysisResult) {
+        analysisResult.style.display = 'none';
+    }
+    
+    // 重置错误信息
+    const errorMessage = document.getElementById('errorMessage');
+    if (errorMessage) {
+        errorMessage.style.display = 'none';
+    }
+    
+    // 重置加载状态
+    const loadingState = document.getElementById('loadingState');
+    if (loadingState) {
+        loadingState.style.display = 'none';
+    }
+    
+    // 确保上传区域中的按钮可点击
+    const uploadButton = uploadArea.querySelector('button');
+    if (uploadButton) {
+        uploadButton.style.pointerEvents = 'auto';
+        uploadButton.style.opacity = '1';
     }
     
     console.log('重置上传状态完成');
