@@ -881,7 +881,7 @@ html {
         flex-direction: column;
         text-align: center;
         padding-top: 120px;
-        padding-bottom: 2rem;
+        padding-bottom: 80px; /* 增加底部padding给白色框留空间 */
     }
 
     .hero-title {
@@ -892,31 +892,21 @@ html {
         font-size: 1.2rem;
     }
 
+    /* 手机端白色框样式调整 */
     .hero-text-content {
-        padding: 2rem;
-        margin-top: 2rem;
-        max-width: 90%;
+        margin-top: 2rem; /* 增加顶部间距 */
+        padding: 2rem; /* 减少内边距 */
+        max-width: 90%; /* 调整宽度 */
     }
 
     .hero-text-content h3 {
-        font-size: 1.5rem;
+        font-size: 1.5rem; /* 调整标题大小 */
         margin-bottom: 1rem;
     }
 
     .hero-text-content p {
-        font-size: 0.9rem;
+        font-size: 0.9rem; /* 调整文字大小 */
         margin-bottom: 0.8rem;
-    }
-
-    .logo-section {
-        margin: 1.5rem 0 0 0;
-        gap: 1.5rem;
-    }
-
-    .btn-primary {
-        padding: 0.8rem 2rem;
-        font-size: 1rem;
-        margin-bottom: 1rem;
     }
 
     .about-content {
@@ -964,6 +954,23 @@ html {
     .preview-actions {
         flex-direction: column;
         align-items: center;
+    }
+
+    /* 小屏幕白色框进一步调整 */
+    .hero-text-content {
+        margin-top: 3rem; /* 进一步增加顶部间距 */
+        padding: 1.5rem; /* 进一步减少内边距 */
+        max-width: 95%; /* 进一步调整宽度 */
+    }
+
+    .hero-text-content h3 {
+        font-size: 1.3rem; /* 进一步调整标题大小 */
+        margin-bottom: 0.8rem;
+    }
+
+    .hero-text-content p {
+        font-size: 0.85rem; /* 进一步调整文字大小 */
+        margin-bottom: 0.7rem;
     }
 
     .logo-section {

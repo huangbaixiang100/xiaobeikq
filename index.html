@@ -66,7 +66,7 @@
                     <h3>上传口腔图像</h3>
                     <p>支持 JPG、PNG 格式，建议图像清晰、光线充足</p>
                     <input type="file" id="imageInput" accept="image/*" style="display: none;">
-                    <button class="btn-secondary" id="selectImageBtn">
+                    <button class="btn-secondary" onclick="console.log('按钮点击'); document.getElementById('imageInput').click()">
                         选择图片
                     </button>
                 </div>
