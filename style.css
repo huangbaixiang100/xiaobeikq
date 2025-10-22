@@ -881,6 +881,7 @@ html {
         flex-direction: column;
         text-align: center;
         padding-top: 120px;
+        padding-bottom: 2rem;
     }
 
     .hero-title {
@@ -889,6 +890,33 @@ html {
 
     .hero-subtitle {
         font-size: 1.2rem;
+    }
+
+    .hero-text-content {
+        padding: 2rem;
+        margin-top: 2rem;
+        max-width: 90%;
+    }
+
+    .hero-text-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-text-content p {
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .logo-section {
+        margin: 1.5rem 0 0 0;
+        gap: 1.5rem;
+    }
+
+    .btn-primary {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+        margin-bottom: 1rem;
     }
 
     .about-content {

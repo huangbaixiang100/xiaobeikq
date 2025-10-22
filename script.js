@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // 初始化事件监听器
 function initializeEventListeners() {
     console.log('初始化事件监听器');
+    
     // 文件输入变化
     const imageInput = document.getElementById('imageInput');
     if (imageInput) {
@@ -23,31 +24,55 @@ function initializeEventListeners() {
         console.error('未找到文件输入元素');
     }
     
+    // 选择图片按钮
+    const selectImageBtn = document.getElementById('selectImageBtn');
+    if (selectImageBtn) {
+        selectImageBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('选择图片按钮点击');
+            const imageInput = document.getElementById('imageInput');
+            if (imageInput) {
+                imageInput.click();
+            }
+        });
+        console.log('选择图片按钮事件已绑定');
+    }
+    
     // 导航菜单
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
     
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        animateHamburger();
-    });
-
-    // 点击菜单项关闭菜单
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            resetHamburger();
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            animateHamburger();
         });
-    });
+
+        // 点击菜单项关闭菜单
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                resetHamburger();
+            });
+        });
+    }
 
     // 联系表单
     const contactForm = document.getElementById('contactForm');
-    contactForm.addEventListener('submit', handleContactForm);
+    if (contactForm) {
+        contactForm.addEventListener('submit', handleContactForm);
+    }
 }
 
 // 初始化拖拽上传
 function initializeDragAndDrop() {
     const uploadArea = document.getElementById('uploadArea');
+    
+    if (!uploadArea) {
+        console.error('未找到上传区域元素');
+        return;
+    }
     
     uploadArea.addEventListener('dragover', (e) => {
         e.preventDefault();
@@ -68,9 +93,18 @@ function initializeDragAndDrop() {
         }
     });
     
-    // 点击上传区域
-    uploadArea.addEventListener('click', () => {
-        document.getElementById('imageInput').click();
+    // 点击上传区域触发文件选择（除了按钮）
+    uploadArea.addEventListener('click', (e) => {
+        // 如果点击的是按钮或者按钮的子元素，不处理
+        if (e.target.tagName === 'BUTTON' || e.target.closest('button') || e.target.id === 'selectImageBtn') {
+            console.log('点击了按钮，跳过上传区域事件');
+            return;
+        }
+        console.log('点击了上传区域');
+        const imageInput = document.getElementById('imageInput');
+        if (imageInput) {
+            imageInput.click();
+        }
     });
 }
 
