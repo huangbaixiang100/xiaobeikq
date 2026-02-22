@@ -151,31 +151,33 @@ function showImagePreview(file) {
     reader.onload = function(e) {
         console.log('图片加载完成');
         const previewImage = document.getElementById('previewImage');
-        previewImage.src = e.target.result;
-        
-        // 显示预览区域
-        const previewArea = document.getElementById('imagePreview');
-        const uploadArea = document.getElementById('uploadArea');
-        
-        console.log('显示预览区域');
-        // 确保元素存在
-        if (previewArea && uploadArea) {
-            previewArea.style.display = 'block'; // 使用style.display而不是classList
-            uploadArea.style.display = 'none';
-            console.log('预览区域display:', previewArea.style.display);
-            console.log('上传区域display:', uploadArea.style.display);
-        } else {
-            console.error('预览区域或上传区域元素未找到');
-            console.log('previewArea:', previewArea);
-            console.log('uploadArea:', uploadArea);
-        }
-        
-        // 确保图片显示
         if (previewImage) {
+            previewImage.src = e.target.result;
+            
+            // 显示预览区域
+            const previewArea = document.getElementById('imagePreview');
+            const uploadArea = document.getElementById('uploadArea');
+            
+            console.log('显示预览区域');
+            // 确保元素存在
+            if (previewArea && uploadArea) {
+                previewArea.style.display = 'block'; // 使用style.display而不是classList
+                uploadArea.style.display = 'none';
+                console.log('预览区域display:', previewArea.style.display);
+                console.log('上传区域display:', uploadArea.style.display);
+            } else {
+                console.error('预览区域或上传区域元素未找到');
+                console.log('previewArea:', previewArea);
+                console.log('uploadArea:', uploadArea);
+            }
+            
+            // 确保图片显示
             previewImage.style.display = 'block';
             previewImage.style.maxWidth = '100%';
             previewImage.style.height = 'auto';
             console.log('预览图片已设置');
+        } else {
+            console.error('未找到预览图片元素');
         }
     };
     
