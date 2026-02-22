@@ -356,7 +356,7 @@ html {
 .preview-result-row {
     display: flex;
     gap: 2rem;
-    align-items: flex-start;
+    align-items: stretch;
     justify-content: center;
     margin: 2rem auto;
     max-width: 1200px;
@@ -368,6 +368,16 @@ html {
     flex: 1 1 0;
     max-width: none;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.preview-result-row .image-preview {
+    flex: 0.95 1 0;
+}
+
+.preview-result-row .analysis-result {
+    flex: 1.25 1 0;
 }
 
 /* 图片预览 */
@@ -456,9 +466,9 @@ html {
 }
 
 .result-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
 }
 
 .result-summary {
@@ -468,6 +478,7 @@ html {
     padding: 1.5rem;
     background: var(--bg-light);
     border-radius: 10px;
+    grid-column: 1 / -1;
 }
 
 .result-item {
@@ -928,6 +939,10 @@ html {
 
     .preview-result-row {
         flex-direction: column;
+    }
+
+    .result-content {
+        grid-template-columns: 1fr;
     }
 
     .about-content {
