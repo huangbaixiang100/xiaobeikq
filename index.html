@@ -72,73 +72,72 @@
                 </div>
             </div>
 
-            <!-- 图片预览 -->
-            <div id="imagePreview" class="image-preview" style="display: none;">
-                <h3>图片预览</h3>
-                <div class="preview-container">
-                    <img id="previewImage" alt="预览图片">
-                    <div class="preview-actions">
-                        <button class="btn-primary" onclick="analyzeImage()">开始分析</button>
-                        <button class="btn-secondary" onclick="resetUpload()">重新选择</button>
+            <div class="preview-result-row">
+                <div id="imagePreview" class="image-preview" style="display: none;">
+                    <h3>图片预览</h3>
+                    <div class="preview-container">
+                        <img id="previewImage" alt="预览图片">
+                        <div class="preview-actions">
+                            <button class="btn-primary" onclick="analyzeImage()">开始分析</button>
+                            <button class="btn-secondary" onclick="resetUpload()">重新选择</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="analysisResult" class="analysis-result" style="display: none;">
+                    <h3>分析结果</h3>
+                    <div class="result-content">
+                        <div class="result-summary">
+                            <div class="result-item">
+                                <span class="label">检测结果：</span>
+                                <span id="classification" class="classification"></span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">置信度：</span>
+                                <span id="confidence" class="confidence"></span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">图片质量：</span>
+                                <span id="qualityAssessment" class="quality"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="result-images">
+                            <div class="image-container">
+                                <h4>检测到的口腔区域</h4>
+                                <img id="mouthImage" alt="检测到的口腔区域">
+                            </div>
+                        </div>
+
+                        <div class="recommendations">
+                            <h4>专业建议</h4>
+                            <ul id="recommendationsList"></ul>
+                        </div>
+
+                        <div class="quality-details">
+                            <h4>图片质量详情</h4>
+                            <div class="quality-metrics">
+                                <div class="metric">
+                                    <span class="metric-label">清晰度：</span>
+                                    <span id="sharpness" class="metric-value"></span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-label">曝光度：</span>
+                                    <span id="exposure" class="metric-value"></span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-label">图片已保存：</span>
+                                    <span id="imageSaved" class="metric-value"></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 加载状态 -->
             <div id="loadingState" class="loading-state" style="display: none;">
                 <div class="loading-spinner"></div>
                 <p>正在分析图像，请稍候...</p>
-            </div>
-
-            <!-- 分析结果 -->
-            <div id="analysisResult" class="analysis-result" style="display: none;">
-                <h3>分析结果</h3>
-                <div class="result-content">
-                    <div class="result-summary">
-                        <div class="result-item">
-                            <span class="label">检测结果：</span>
-                            <span id="classification" class="classification"></span>
-                        </div>
-                        <div class="result-item">
-                            <span class="label">置信度：</span>
-                            <span id="confidence" class="confidence"></span>
-                        </div>
-                        <div class="result-item">
-                            <span class="label">图片质量：</span>
-                            <span id="qualityAssessment" class="quality"></span>
-                        </div>
-                    </div>
-                    
-                    <div class="result-images">
-                        <div class="image-container">
-                            <h4>检测到的口腔区域</h4>
-                            <img id="mouthImage" alt="检测到的口腔区域">
-                        </div>
-                    </div>
-
-                    <div class="recommendations">
-                        <h4>专业建议</h4>
-                        <ul id="recommendationsList"></ul>
-                    </div>
-
-                    <div class="quality-details">
-                        <h4>图片质量详情</h4>
-                        <div class="quality-metrics">
-                            <div class="metric">
-                                <span class="metric-label">清晰度：</span>
-                                <span id="sharpness" class="metric-value"></span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-label">曝光度：</span>
-                                <span id="exposure" class="metric-value"></span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-label">图片已保存：</span>
-                                <span id="imageSaved" class="metric-value"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- 错误提示 -->
