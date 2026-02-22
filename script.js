@@ -258,20 +258,19 @@ function showAnalysisResult(result) {
     const qualityAssessment = assessQuality(result.sharpness, result.exposure);
     document.getElementById('qualityAssessment').textContent = qualityAssessment;
     
-    // 设置口腔区域图片
-    if (result.cropped_mouth_image_base64) {
-        document.getElementById('mouthImage').src = 
-            'data:image/jpeg;base64,' + result.cropped_mouth_image_base64;
-        console.log('设置了口腔区域图片');
-    } else {
-        console.log('未找到口腔区域图片');
-        // 如果没有图片，显示提示信息
-        const mouthImage = document.getElementById('mouthImage');
-        mouthImage.style.display = 'none';
-        const container = mouthImage.parentElement;
-        const infoDiv = document.createElement('div');
-        infoDiv.className = 'mouth-info';
-        infoDiv.innerHTML = `
+    const mouthImage = document.getElementById('mouthImage');
+    if (mouthImage) {
+        if (result.cropped_mouth_image_base64) {
+            mouthImage.src = 'data:image/jpeg;base64,' + result.cropped_mouth_image_base64;
+            console.log('设置了口腔区域图片');
+        } else {
+            console.log('未找到口腔区域图片');
+            mouthImage.style.display = 'none';
+            const container = mouthImage.parentElement;
+            if (container) {
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'mouth-info';
+                infoDiv.innerHTML = `
             <div class="info-item">
                 <span class="info-label">检测状态：</span>
                 <span class="info-value error">未检测到口腔区域</span>
@@ -281,7 +280,9 @@ function showAnalysisResult(result) {
                 <span class="info-value">请重新拍摄，确保口腔区域清晰可见</span>
             </div>
         `;
-        container.appendChild(infoDiv);
+                container.appendChild(infoDiv);
+            }
+        }
     }
     
     // 设置建议
