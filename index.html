@@ -57,7 +57,7 @@
     <!-- 上传检测部分 -->
     <section id="upload" class="upload-section">
         <div class="container">
-            <h2 class="section-title">口腔图像检测</h2>
+            <h2 class="section-title">乳牙滞留检测</h2>
             
             <!-- 上传区域 -->
             <div class="upload-area" id="uploadArea">
@@ -73,14 +73,6 @@
             </div>
 
             <div class="preview-result-row">
-                <div id="modelPrediction" class="model-prediction result-card" style="display: none;">
-                    <h3>模型预测结果</h3>
-                    <div class="heatmap-container">
-                        <img id="heatmapImage" alt="模型热力图" style="display: none;">
-                        <p id="heatmapPlaceholder" style="display: none;">暂无热力图数据</p>
-                    </div>
-                </div>
-
                 <div id="imagePreview" class="image-preview result-card" style="display: none;">
                     <h3>图片预览</h3>
                     <div class="preview-container">
@@ -89,6 +81,14 @@
                             <button class="btn-primary" onclick="analyzeImage()">开始分析</button>
                             <button class="btn-secondary" onclick="resetUpload()">重新选择</button>
                         </div>
+                    </div>
+                </div>
+
+                <div id="modelPrediction" class="model-prediction result-card" style="display: none;">
+                    <h3>模型预测结果</h3>
+                    <div class="heatmap-container">
+                        <img id="heatmapImage" alt="模型热力图" style="display: none;">
+                        <p id="heatmapPlaceholder" style="display: none;">暂无热力图数据</p>
                     </div>
                 </div>
 
