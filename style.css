@@ -362,43 +362,48 @@ html {
     max-width: 1200px;
 }
 
-.preview-result-row .image-preview,
-.preview-result-row .analysis-result {
-    margin: 0;
+/* 三栏等宽等高布局：模型预测结果 | 图片预览 | 分析结果 */
+.preview-result-row.three-cols {
+    display: flex;
+    gap: 1.5rem;
+    align-items: stretch;
+    min-height: 420px;
+}
+
+.preview-result-row.three-cols .result-column {
     flex: 1 1 0;
-    max-width: none;
-    width: 100%;
+    min-width: 0;
     display: flex;
     flex-direction: column;
+    background: var(--white);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
 }
 
-.preview-result-row .image-preview {
-    flex: 0.95 1 0;
+.preview-result-row.three-cols .column-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    flex-shrink: 0;
 }
 
-.preview-result-row .analysis-result {
-    flex: 1.25 1 0;
+.preview-result-row.three-cols .column-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
 }
 
 /* 图片预览 */
 .image-preview {
-    max-width: 800px;
-    margin: 2rem auto;
-    background: var(--white);
-    border-radius: 15px;
-    padding: 2rem;
-    box-shadow: var(--shadow);
-    display: none; /* 默认隐藏 */
+    margin: 0;
 }
 
 .image-preview.show {
-    display: block !important; /* 强制显示 */
-}
-
-.image-preview h3 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--text-dark);
+    display: flex !important;
 }
 
 .preview-container {
@@ -450,19 +455,7 @@ html {
 
 /* 分析结果 */
 .analysis-result {
-    max-width: 1000px;
-    margin: 2rem auto;
-    background: var(--white);
-    border-radius: 15px;
-    padding: 2rem;
-    box-shadow: var(--shadow);
-}
-
-.analysis-result h3 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--text-dark);
-    font-size: 1.8rem;
+    margin: 0;
 }
 
 .result-content {
@@ -563,8 +556,9 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex: 1;
     min-height: 200px;
-    background: #fff;
+    background: var(--bg-light);
     border-radius: 8px;
     padding: 10px;
 }
@@ -971,6 +965,11 @@ html {
     .hero-text-content p {
         font-size: 0.9rem; /* 调整文字大小 */
         margin-bottom: 0.8rem;
+    }
+
+    .preview-result-row.three-cols {
+        flex-direction: column;
+        min-height: 0;
     }
 
     .preview-result-row {

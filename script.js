@@ -162,7 +162,7 @@ function showImagePreview(file) {
             console.log('显示预览区域');
             // 确保元素存在
             if (previewArea && uploadArea) {
-                previewArea.style.display = 'block'; // 使用style.display而不是classList
+                previewArea.style.display = 'flex'; // 与三栏布局一致
                 uploadArea.style.display = 'none';
                 console.log('预览区域display:', previewArea.style.display);
                 console.log('上传区域display:', uploadArea.style.display);
@@ -331,14 +331,6 @@ function showAnalysisResult(result) {
         recommendationsList.appendChild(li);
     }
     
-    // 设置质量详情
-    document.getElementById('sharpness').textContent = 
-        result.sharpness ? result.sharpness.toFixed(2) : 'N/A';
-    document.getElementById('exposure').textContent = 
-        result.exposure ? result.exposure.toFixed(2) : 'N/A';
-    document.getElementById('imageSaved').textContent = 
-        result.image_saved ? '是' : '否';
-    
     // 根据检测结果设置样式
     const classificationElement = document.getElementById('classification');
     if (result.classification === '乳牙滞留') {
@@ -347,8 +339,10 @@ function showAnalysisResult(result) {
         classificationElement.className = 'classification normal';
     }
     
-    // 显示结果
-    document.getElementById('analysisResult').style.display = 'block';
+    // 显示三栏：模型预测结果、图片预览、分析结果
+    const heatmapCol = document.getElementById('heatmapColumn');
+    if (heatmapCol) heatmapCol.style.display = 'flex';
+    document.getElementById('analysisResult').style.display = 'flex';
 }
 
 // 评估图片质量
@@ -397,7 +391,7 @@ function showError(message) {
 // 隐藏所有状态
 function hideAllStates() {
     console.log('隐藏所有状态');
-    const states = ['loadingState', 'analysisResult', 'errorMessage'];
+    const states = ['loadingState', 'analysisResult', 'errorMessage', 'heatmapColumn'];
     states.forEach(id => {
         const element = document.getElementById(id);
         if (element) {
@@ -438,6 +432,10 @@ function resetUpload() {
             previewImage.style.display = 'none';
         }
     }
+    
+    // 隐藏模型预测结果栏
+    const heatmapCol = document.getElementById('heatmapColumn');
+    if (heatmapCol) heatmapCol.style.display = 'none';
     
     // 隐藏所有状态
     hideAllStates();
