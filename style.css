@@ -290,6 +290,10 @@ html {
     background: var(--bg-light);
 }
 
+.upload-section .container {
+    max-width: 2400px;
+}
+
 .section-title {
     font-size: 2.5rem;
     text-align: center;
@@ -359,7 +363,7 @@ html {
     align-items: stretch;
     justify-content: center;
     margin: 2rem auto;
-    max-width: 1200px;
+    max-width: 2400px;
 }
 
 .preview-result-row .result-card {
