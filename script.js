@@ -1,5 +1,6 @@
 // API配置
-// 使用相对路径，自动适应当前域名
+// 部署在 Vercel 时留空即可（同源请求）。本地用 file:// 或静态服务器打开时，
+// 请改为你的 Vercel 部署地址，例如：'https://你的项目.vercel.app'
 const API_BASE_URL = '';
 
 // 全局变量
@@ -209,10 +210,11 @@ async function analyzeImage() {
         const formData = new FormData();
         formData.append('file', selectedFile);
         
-        console.log('正在上传图片到:', `/api/analyze?save_image_flag=true&include_heatmap=true`);
+        const analyzeUrl = `${API_BASE_URL}/api/analyze?save_image_flag=true&include_heatmap=true`;
+        console.log('正在上传图片到:', analyzeUrl);
         
         // 调用API进行分析
-        const response = await fetch(`/api/analyze?save_image_flag=true&include_heatmap=true`, {
+        const response = await fetch(analyzeUrl, {
             method: 'POST',
             body: formData
         });
@@ -238,6 +240,13 @@ async function analyzeImage() {
         // 检查是否是混合内容错误
         if (window.location.protocol === 'https:' && API_BASE_URL.startsWith('http:')) {
             showError('安全连接失败。请尝试使用 HTTP 访问网站：' + window.location.href.replace('https:', 'http:'));
+        } else if (errorMsg === 'Failed to fetch' || error.name === 'TypeError') {
+            const isLocal = window.location.protocol === 'file:' || window.location.hostname === 'localhost' && !API_BASE_URL;
+            showError(
+                isLocal
+                    ? '无法连接分析服务。请将网站部署到 Vercel 后使用，或在项目目录运行 vercel dev 进行本地测试。'
+                    : '网络错误或服务不可用：' + errorMsg
+            );
         } else {
             showError('网络错误或服务不可用：' + errorMsg);
         }

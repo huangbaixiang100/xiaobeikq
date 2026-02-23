@@ -4,10 +4,11 @@ const FormData = require('form-data');
 const getRawBody = require('raw-body');
 
 module.exports = async (req, res) => {
-  // 设置CORS头
+  // 设置CORS头，避免浏览器报跨域或 Failed to fetch
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS, GET');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization');
+  res.setHeader('Access-Control-Max-Age', '86400');
 
   // 处理 OPTIONS 请求
   if (req.method === 'OPTIONS') {
@@ -22,28 +23,27 @@ module.exports = async (req, res) => {
   }
 
   try {
-    // 获取原始请求体
+    // 获取原始请求体（保持 Content-Type 含 boundary 直接转发）
     const rawBody = await getRawBody(req);
-    
-    // 解析multipart/form-data边界
-    const boundary = req.headers['content-type'].split('boundary=')[1];
-    
+    const contentType = req.headers['content-type'] || 'application/octet-stream';
+
     // 转发请求到实际的API
     const API_URL = 'http://60.28.106.46:15025/api/v1/analyze';
     
     // 获取查询参数
     const save_image_flag = req.query.save_image_flag === 'true';
-    const apiUrl = `${API_URL}?save_image_flag=${save_image_flag}`;
+    const include_heatmap = req.query.include_heatmap === 'true';
+    const apiUrl = `${API_URL}?save_image_flag=${save_image_flag}&include_heatmap=${include_heatmap}`;
 
     console.log('Forwarding request to:', apiUrl);
     console.log('Content-Type:', req.headers['content-type']);
 
-    // 转发请求，保持原始的content-type和body
+    // 转发请求，保持原始的 content-type 和 body
     const response = await fetch(apiUrl, {
       method: 'POST',
       body: rawBody,
       headers: {
-        'Content-Type': req.headers['content-type']
+        'Content-Type': contentType
       }
     });
 
