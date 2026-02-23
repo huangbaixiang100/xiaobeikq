@@ -162,7 +162,7 @@ function showImagePreview(file) {
             console.log('显示预览区域');
             // 确保元素存在
             if (previewArea && uploadArea) {
-                previewArea.style.display = 'flex'; // 与三栏布局一致
+                previewArea.style.display = 'block'; // 使用style.display而不是classList
                 uploadArea.style.display = 'none';
                 console.log('预览区域display:', previewArea.style.display);
                 console.log('上传区域display:', uploadArea.style.display);
@@ -339,10 +339,9 @@ function showAnalysisResult(result) {
         classificationElement.className = 'classification normal';
     }
     
-    // 显示三栏：模型预测结果、图片预览、分析结果
-    const heatmapCol = document.getElementById('heatmapColumn');
-    if (heatmapCol) heatmapCol.style.display = 'flex';
-    document.getElementById('analysisResult').style.display = 'flex';
+    // 显示结果
+    document.getElementById('modelPrediction').style.display = 'block';
+    document.getElementById('analysisResult').style.display = 'block';
 }
 
 // 评估图片质量
@@ -391,7 +390,7 @@ function showError(message) {
 // 隐藏所有状态
 function hideAllStates() {
     console.log('隐藏所有状态');
-    const states = ['loadingState', 'analysisResult', 'errorMessage', 'heatmapColumn'];
+    const states = ['loadingState', 'modelPrediction', 'analysisResult', 'errorMessage'];
     states.forEach(id => {
         const element = document.getElementById(id);
         if (element) {
@@ -433,10 +432,6 @@ function resetUpload() {
         }
     }
     
-    // 隐藏模型预测结果栏
-    const heatmapCol = document.getElementById('heatmapColumn');
-    if (heatmapCol) heatmapCol.style.display = 'none';
-    
     // 隐藏所有状态
     hideAllStates();
     
@@ -455,6 +450,22 @@ function resetUpload() {
     const analysisResult = document.getElementById('analysisResult');
     if (analysisResult) {
         analysisResult.style.display = 'none';
+    }
+
+    const modelPrediction = document.getElementById('modelPrediction');
+    if (modelPrediction) {
+        modelPrediction.style.display = 'none';
+    }
+
+    const heatmapImage = document.getElementById('heatmapImage');
+    const heatmapPlaceholder = document.getElementById('heatmapPlaceholder');
+    if (heatmapImage) {
+        heatmapImage.src = '';
+        heatmapImage.style.display = 'none';
+    }
+    if (heatmapPlaceholder) {
+        heatmapPlaceholder.textContent = '暂无热力图数据';
+        heatmapPlaceholder.style.display = 'none';
     }
     
     // 重置错误信息

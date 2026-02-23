@@ -362,48 +362,41 @@ html {
     max-width: 1200px;
 }
 
-/* 三栏等宽等高布局：模型预测结果 | 图片预览 | 分析结果 */
-.preview-result-row.three-cols {
-    display: flex;
-    gap: 1.5rem;
-    align-items: stretch;
-    min-height: 420px;
-}
-
-.preview-result-row.three-cols .result-column {
+.preview-result-row .result-card {
+    margin: 0;
     flex: 1 1 0;
-    min-width: 0;
+    max-width: none;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    background: var(--white);
-    border-radius: 15px;
-    padding: 1.5rem;
-    box-shadow: var(--shadow);
+    min-height: 520px;
 }
 
-.preview-result-row.three-cols .column-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 1rem;
-    color: var(--text-dark);
-    flex-shrink: 0;
-}
-
-.preview-result-row.three-cols .column-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
+.preview-result-row .image-preview,
+.preview-result-row .analysis-result {
+    flex: 1 1 0;
 }
 
 /* 图片预览 */
 .image-preview {
-    margin: 0;
+    max-width: 800px;
+    margin: 2rem auto;
+    background: var(--white);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    display: none; /* 默认隐藏 */
 }
 
 .image-preview.show {
-    display: flex !important;
+    display: block !important; /* 强制显示 */
+}
+
+.image-preview h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-dark);
+    font-size: 1.8rem;
 }
 
 .preview-container {
@@ -455,13 +448,26 @@ html {
 
 /* 分析结果 */
 .analysis-result {
-    margin: 0;
+    max-width: 1000px;
+    margin: 2rem auto;
+    background: var(--white);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.analysis-result h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-dark);
+    font-size: 1.8rem;
 }
 
 .result-content {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
+    flex: 1;
 }
 
 .result-summary {
@@ -539,26 +545,27 @@ html {
 }
 
 /* 热力图相关样式 */
-.result-heatmap {
-    text-align: center;
-    margin: 1.5rem 0;
-    padding: 1.5rem;
-    background: var(--bg-light);
-    border-radius: 10px;
+.model-prediction {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
 }
 
-.result-heatmap h4 {
-    margin-bottom: 1rem;
+.model-prediction h3 {
+    text-align: center;
+    margin-bottom: 2rem;
     color: var(--text-dark);
+    font-size: 1.8rem;
 }
 
 .heatmap-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 340px;
     flex: 1;
-    min-height: 200px;
-    background: var(--bg-light);
+    background: #fff;
     border-radius: 8px;
     padding: 10px;
 }
@@ -638,42 +645,6 @@ html {
 
 .recommendations li:last-child {
     border-bottom: none;
-}
-
-.quality-details {
-    background: var(--bg-light);
-    border-radius: 10px;
-    padding: 1.5rem;
-}
-
-.quality-details h4 {
-    margin-bottom: 1rem;
-    color: var(--text-dark);
-}
-
-.quality-metrics {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-}
-
-.metric {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem;
-    background: var(--white);
-    border-radius: 5px;
-}
-
-.metric-label {
-    font-weight: 600;
-    color: var(--text-light);
-}
-
-.metric-value {
-    font-weight: bold;
-    color: var(--primary-color);
 }
 
 /* 错误提示 */
@@ -967,17 +938,8 @@ html {
         margin-bottom: 0.8rem;
     }
 
-    .preview-result-row.three-cols {
-        flex-direction: column;
-        min-height: 0;
-    }
-
     .preview-result-row {
         flex-direction: column;
-    }
-
-    .result-content {
-        grid-template-columns: 1fr;
     }
 
     .about-content {
@@ -996,8 +958,8 @@ html {
         grid-template-columns: 1fr;
     }
 
-    .quality-metrics {
-        grid-template-columns: 1fr;
+    .preview-result-row .result-card {
+        min-height: auto;
     }
 
     .footer .container {

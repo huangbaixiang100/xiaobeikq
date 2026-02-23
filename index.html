@@ -72,34 +72,29 @@
                 </div>
             </div>
 
-            <div class="preview-result-row three-cols">
-                <!-- 模型预测结果 -->
-                <div id="heatmapColumn" class="result-column" style="display: none;">
-                    <h3 class="column-title">模型预测结果</h3>
-                    <div class="column-body">
-                        <div class="heatmap-container">
-                            <img id="heatmapImage" alt="模型热力图" style="display: none;">
-                            <p id="heatmapPlaceholder" style="display: none;">暂无热力图数据</p>
+            <div class="preview-result-row">
+                <div id="modelPrediction" class="model-prediction result-card" style="display: none;">
+                    <h3>模型预测结果</h3>
+                    <div class="heatmap-container">
+                        <img id="heatmapImage" alt="模型热力图" style="display: none;">
+                        <p id="heatmapPlaceholder" style="display: none;">暂无热力图数据</p>
+                    </div>
+                </div>
+
+                <div id="imagePreview" class="image-preview result-card" style="display: none;">
+                    <h3>图片预览</h3>
+                    <div class="preview-container">
+                        <img id="previewImage" alt="预览图片">
+                        <div class="preview-actions">
+                            <button class="btn-primary" onclick="analyzeImage()">开始分析</button>
+                            <button class="btn-secondary" onclick="resetUpload()">重新选择</button>
                         </div>
                     </div>
                 </div>
-                <!-- 图片预览 -->
-                <div id="imagePreview" class="result-column image-preview" style="display: none;">
-                    <h3 class="column-title">图片预览</h3>
-                    <div class="column-body">
-                        <div class="preview-container">
-                            <img id="previewImage" alt="预览图片">
-                            <div class="preview-actions">
-                                <button class="btn-primary" onclick="analyzeImage()">开始分析</button>
-                                <button class="btn-secondary" onclick="resetUpload()">重新选择</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- 分析结果 -->
-                <div id="analysisResult" class="result-column analysis-result" style="display: none;">
-                    <h3 class="column-title">分析结果</h3>
-                    <div class="column-body">
+
+                <div id="analysisResult" class="analysis-result result-card" style="display: none;">
+                    <h3>分析结果</h3>
+                    <div class="result-content">
                         <div class="result-summary">
                             <div class="result-item">
                                 <span class="label">检测结果：</span>
@@ -110,6 +105,7 @@
                                 <span id="confidence" class="confidence"></span>
                             </div>
                         </div>
+
                         <div class="recommendations">
                             <h4>专业建议</h4>
                             <ul id="recommendationsList"></ul>
