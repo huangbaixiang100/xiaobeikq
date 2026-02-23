@@ -209,10 +209,10 @@ async function analyzeImage() {
         const formData = new FormData();
         formData.append('file', selectedFile);
         
-        console.log('正在上传图片到:', `/api/analyze?save_image_flag=true`);
+        console.log('正在上传图片到:', `/api/analyze?save_image_flag=true&include_heatmap=true`);
         
         // 调用API进行分析
-        const response = await fetch(`/api/analyze?save_image_flag=true`, {
+        const response = await fetch(`/api/analyze?save_image_flag=true&include_heatmap=true`, {
             method: 'POST',
             body: formData
         });
@@ -256,9 +256,29 @@ function showAnalysisResult(result) {
     // 打印完整结果以便调试
     console.log('API返回结果:', result);
     
-    // 设置图片质量
-    const qualityAssessment = assessQuality(result.sharpness, result.exposure);
-    document.getElementById('qualityAssessment').textContent = qualityAssessment;
+    // 设置模型预测结果（热力图）
+    const heatmapImage = document.getElementById('heatmapImage');
+    const heatmapPlaceholder = document.getElementById('heatmapPlaceholder');
+    
+    if (heatmapImage && heatmapPlaceholder) {
+        if (result.stage2_heatmap_base64) {
+            heatmapImage.src = 'data:image/jpeg;base64,' + result.stage2_heatmap_base64;
+            heatmapImage.style.display = 'block';
+            heatmapPlaceholder.style.display = 'none';
+            console.log('设置了热力图图片');
+        } else {
+            console.log('未找到热力图数据');
+            heatmapImage.style.display = 'none';
+            heatmapPlaceholder.style.display = 'block';
+            if (!result.mouth_detected) {
+                heatmapPlaceholder.textContent = '未检测到口腔区域，无法生成热力图';
+            } else {
+                heatmapPlaceholder.textContent = '暂无热力图数据';
+            }
+        }
+    } else {
+        console.error('未找到热力图元素');
+    }
     
     const mouthImage = document.getElementById('mouthImage');
     if (mouthImage) {
