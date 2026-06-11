@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="小北健康乳牙滞留检测系统">
+    <title>小北健康·乳牙滞留检测</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="logo">
+                <img src="xiaobei-logo.png" alt="小北健康" class="logo-img">
+                <span>小北健康·乳牙滞留检测</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">首页</a></li>
+                <li><a href="#upload" class="nav-link">上传检测</a></li>
+                <li><a href="#contact" class="nav-link">技术支持</a></li>
+            </ul>
+            <button class="hamburger" aria-label="菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <section id="home" class="hero">
+        <div class="hero-bg">
+            <div class="hero-circle hero-circle-1"></div>
+            <div class="hero-circle hero-circle-2"></div>
+            <div class="hero-circle hero-circle-3"></div>
+        </div>
+        <div class="container hero-container">
+            <div class="hero-left">
+                <h1 class="hero-title">AI 驱动的<br>乳牙滞留智能检测</h1>
+                <p class="hero-subtitle">基于人工智能的在线乳牙滞留检测系统，帮助家长科学评估孩子牙齿健康状况。</p>
+                <div class="hero-features">
+                    <div class="hero-feature-pill">
+                        <div class="hero-feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                        </div>
+                        <div class="hero-feature-text">
+                            <span>拍照上传</span>
+                            <small>简单便捷</small>
+                        </div>
+                    </div>
+                    <div class="hero-feature-pill">
+                        <div class="hero-feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 1 7 7c0 2.5-1.5 4.5-3 6l-1 5H9l-1-5c-1.5-1.5-3-3.5-3-6a7 7 0 0 1 7-7z"/><path d="M9 18h6"/></svg>
+                        </div>
+                        <div class="hero-feature-text">
+                            <span>AI 分析</span>
+                            <small>精准识别</small>
+                        </div>
+                    </div>
+                    <div class="hero-feature-pill">
+                        <div class="hero-feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                        </div>
+                        <div class="hero-feature-text">
+                            <span>专业建议</span>
+                            <small>科学指导</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-center">
+                <div class="tooth-illustration">
+                    <img src="ChatGPT Image 2026年6月11日 19_13_33.png" alt="乳牙检测 3D 插图" class="tooth-image">
+                </div>
+            </div>
+
+            <div class="hero-right" id="upload">
+                <div class="upload-card">
+                    <h2 class="upload-card-title">开始乳牙滞留检测</h2>
+                    <p class="upload-card-desc">上传孩子口腔照片，AI 智能分析牙齿情况</p>
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-content">
+                            <div class="upload-icon">
+                                <svg viewBox="0 0 48 48" fill="none">
+                                    <path d="M24 32V16M24 16L18 22M24 16L30 22" stroke="#F57C00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M8 32V36C8 38.2 9.8 40 12 40H36C38.2 40 40 38.2 40 36V32" stroke="#F57C00" stroke-width="2.5" stroke-linecap="round"/>
+                                    <path d="M14 28C14 22.5 18.5 18 24 18C29.5 18 34 22.5 34 28" stroke="#F57C00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                                </svg>
+                            </div>
+                            <h3>点击上传口腔照片</h3>
+                            <p>支持 JPG、PNG 格式，文件小于 10MB</p>
+                            <input type="file" id="imageInput" accept="image/*" hidden>
+                            <button type="button" class="btn-select" id="selectImageBtn">选择照片</button>
+                        </div>
+                    </div>
+                    <p class="privacy-note">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        我们将保护您的隐私，照片仅用于检测分析
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="hero-wave">
+            <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+                <path d="M0,50 C240,100 480,0 720,50 C960,100 1200,0 1440,50 L1440,100 L0,100 Z" fill="#F7F7F7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- 分析结果区域 -->
+    <section class="results-section">
+        <div class="container">
+            <div class="preview-result-row">
+                <div id="imagePreview" class="image-preview result-card" style="display: none;">
+                    <h3>图片预览</h3>
+                    <div class="preview-container">
+                        <img id="previewImage" alt="预览图片">
+                        <div class="preview-actions">
+                            <button class="btn-primary" onclick="analyzeImage()">开始分析</button>
+                            <button class="btn-secondary" onclick="resetUpload()">重新选择</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="modelPrediction" class="model-prediction result-card" style="display: none;">
+                    <h3>模型预测结果</h3>
+                    <div class="heatmap-container">
+                        <img id="heatmapImage" alt="模型热力图" style="display: none;">
+                        <p id="heatmapPlaceholder" style="display: none;">暂无热力图数据</p>
+                    </div>
+                </div>
+
+                <div id="analysisResult" class="analysis-result result-card" style="display: none;">
+                    <h3>分析结果</h3>
+                    <div class="result-content">
+                        <div class="result-summary">
+                            <div class="result-item">
+                                <span class="label">检测结果：</span>
+                                <span id="classification" class="classification"></span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">置信度：</span>
+                                <span id="confidence" class="confidence"></span>
+                            </div>
+                        </div>
+                        <div class="recommendations">
+                            <h4>专业建议</h4>
+                            <ul id="recommendationsList"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loadingState" class="loading-state" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>正在分析图像，请稍候...</p>
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;">
+                <div class="error-icon">⚠️</div>
+                <p id="errorText"></p>
+                <button class="btn-secondary" onclick="resetUpload()">重新上传</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 为什么选择我们 -->
+    <section class="why-section">
+        <div class="container">
+            <h2 class="section-heading"><span class="heading-dash"></span>为什么选择小北健康乳牙滞留检测？<span class="heading-dash"></span></h2>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon why-icon-img">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAByUlEQVR4nO2YMUvDQBiGA+5Kunx3pkWcXdWoQ1KJoDY4dpAOrf0DbuLkDxCd3TxB0CxO/RXq5NbWzf4KhxK5VOqJOb2kTS5X74WXC8dd+Z7k7i18hqGlpaWltACqPmDnGZD7jrAbipiujfZA1Zdb/KJzIFo0FwYkQtC3ODEAdp/kATDHplRanxfdZ5o7C+xxMmSJfZN57p19AEiRLFkZkibWNJIlMxgQgJhGsmQGgAUSK22yZCUzaWIVIh0mqWkWAIafi4fs/HXQq5GgNyBBP8zbiAEYzfUGN/fdfQ6A0xktdjrsvKziSSxABPHG+Qb1OYDtFTp+B5BTPOEC9JMdcQ0Q5AZQV/sIIe4lVgbAjY1RlQDCuD+NfwVw2DwPrbI3/h363GhdqANgMcWPISpe/gCogCYaAMuzvdnO6Q5UpnsHCMeZAdDEYSHoc+PoUh0AkpMNVQCOT25De6sdjUoCLC3vRvXQUUkAlDZGlQQApi9EezKyAa7Iy1ealT0BgAJ35lbtpsARQk5NdqGI49Ozh78Boq8AVR9h97EI3Wmr7IVrG60fxf8KECeZl5hwnBBAXmOLxJrb2IoXbeXRTUUpnty97iUC0DKy0QdV6281mEpYAwAAAABJRU5ErkJggg==" alt="专业可靠">
+                    </div>
+                    <div class="why-content">
+                        <h3>专业可靠</h3>
+                        <p>北京大学森智实验室提供技术支持，AI 模型经海量口腔影像数据训练，识别稳定可靠</p>
+                    </div>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon why-icon-img">
+                        <img src="data:image/png;base64,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" alt="AI 智能识别">
+                    </div>
+                    <div class="why-content">
+                        <h3>AI 智能识别</h3>
+                        <p>采用先进的深度学习模型，精准识别乳牙滞留等口腔问题</p>
+                    </div>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon why-icon-img">
+                        <img src="data:image/png;base64,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" alt="隐私安全保障">
+                    </div>
+                    <div class="why-content">
+                        <h3>隐私安全保障</h3>
+                        <p>严格保护用户隐私，上传照片仅用于检测分析，不做其他用途</p>
+                    </div>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon why-icon-img">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEgElEQVR4nO2Y3U9bdRiAT+LG/gFj4m64gEFoxhilVWBtIFAEimwzCxsOKBQY40OzyRwYSYbxgg8ZLiZemDA1GbLEJZIQhYyscTK5WrzzH9Dxlcyb3TJjHvPCTi2kP3t6zikUPU/yJH1/5/CcN6UXTTXNwcHBwcHBwcFhf3ENk5HZy3hmH+uZfWCLvaxl9jImbS3dyephLKsHUuSolu7kdLGWexlyL1FqY9MnTWlr6Y6rC8SD0rWdE50gHpSu7bg7QIx3plK/r6idOncHq+52Vk6GqU3UNUX2uxzxhJn0hNnwhiEp23jmbeOBt5UavecJU+sJE9m6FnNv7DMTdaOtNlZizp/Ea1h+A0pamSxpA6sWt3KjpJWPVNdN7rYSbbTufAOsdHfga2HDHwJ/iNe0JClt56gvxKA/xOaLhrjpa2ZArsk9+rlmglMhan0hVnwtPPHFfMqsdndQ3gyiZoGyJj7QO+XNDCbqx9wb15Tu3dBARqCJ8cqLrAeaQFezQKCRo9FW4/Z/PnotTj/2ufE09Eyze1c3MlbzNuxWs4iqY7Vvezd4gbW6Rghe2P5mJq9FzSKqjtW+7d0z50FUzWZRdeKd62cqzXYNca4BxESzUVWdfzs32ky2a4jz50BMNBtV1Ul0bhXT3YtvgaiazaLq2NW3rRs6C6JqNouqY1c/lqYz+KXZcpbVpP84fBrERLNRVZ1E51vX6ukJn+b3ZJ8Z40jSb8ClehATzUZVdRKdd9XTk+yzdDvrWe18kxH5Upf0G9BdB6JqNouqE++8u4bi7iCbcn45SMde7BflnSCIqtksqs7u8+4qXukLsrJ1XsutvdovytUaEBPNRlV1dK5U85ecNzTw0nAZh67U8OPWvdX83FXE4d33G+2a5tobICaajarq6PRX8Zucvxcg2F/FLXndX8XG1WpeNbOfZQarQFTNdnV1BgIM69de+Px6Nf693i/KUCWIqtksqo589D+s4NOhCp4NVfDrUCWB/dgvyo0KEFXz6BKPxpbAiHKvqpOq/SzzcTmIqvmrCCSjqpOq/SwzUgaiav5hAZJR1UnVfpYZ94Oomh/P8ejxHBh0SdVJ1X6WmTwFomq2q5tu+0X5rBRE1WyWVHXs6kb5vBhE1WyWVHXs6kb54nUQVbNZUtWxqxvlthfE3bMZp7w8nfKy8KWHspjzyikPi7e9/GGlrdrXMl97QNw9p5uqfS0z7QZRNSfDTBEv33Hz/p1C/tQ704U8/6aIa3Jtv/eLy92TIOrzTAEbMk+7KdZMcreAAb07U8B1s52ZQkq2OgWsq/a1zL0CEGPmCf0sXfz2BOOqfS0zmw+iPi9kc2Q2n4nZfNb1a/vo+nfH+UR2Uu1rmbnjIGoHBNv3nXexNu+CBRc+Lc35Pg+/7DrvMvH7v4rFPEYX88BO4zzD1v79PBO//6u45yIjkstoJIe1SC7Y4YOcfz5NkWP4bevmshrJYUR21tKRh9nc/OkYxDWbCe2/zi9FHF7O5uZyFk+Xs2HL7dcTD8s4tN/7OTg4ODg4ODho/0f+BgnEHYT/PZ0uAAAAAElFTkSuQmCC" alt="专业建议指导">
+                    </div>
+                    <div class="why-content">
+                        <h3>专业建议指导</h3>
+                        <p>检测完成后提供专业的解读建议，帮助家长科学护理孩子口腔</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 检测流程 -->
+    <section class="process-section">
+        <div class="container">
+            <h2 class="section-heading"><span class="heading-dash"></span>检测流程<span class="heading-dash"></span></h2>
+            <div class="process-flow">
+                <div class="process-step">
+                    <div class="process-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                    </div>
+                    <h3>1. 拍照上传</h3>
+                    <p>拍摄孩子口腔照片并上传至系统</p>
+                </div>
+                <div class="process-arrow">›</div>
+                <div class="process-step">
+                    <div class="process-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 1 7 7c0 2.5-1.5 4.5-3 6l-1 5H9l-1-5c-1.5-1.5-3-3.5-3-6a7 7 0 0 1 7-7z"/></svg>
+                    </div>
+                    <h3>2. AI 分析</h3>
+                    <p>AI 模型自动识别牙齿状况</p>
+                </div>
+                <div class="process-arrow">›</div>
+                <div class="process-step">
+                    <div class="process-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                    </div>
+                    <h3>3. 生成结果</h3>
+                    <p>生成检测报告与置信度评分</p>
+                </div>
+                <div class="process-arrow">›</div>
+                <div class="process-step">
+                    <div class="process-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                    </div>
+                    <h3>4. 专业建议</h3>
+                    <p>提供专业的护理建议与就医指导</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技术支持 -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-card-item">
+                    <h3>技术支持</h3>
+                    <p>如果您在检测过程中遇到任何问题，欢迎通过以下邮箱联系我们，我们将竭诚为您服务。</p>
+                    <div class="contact-item">
+                        <span class="contact-item-icon contact-icon-email">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </span>
+                        <span>13138888001@qq.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-logo">
+                <img src="xiaobei-logo.png" alt="小北健康" class="footer-logo-img">
+                <span>小北健康·乳牙滞留检测</span>
+            </div>
+            <p class="footer-copyright">© 2024 小北健康·乳牙滞留检测系统. All rights reserved.</p>
+            <div class="footer-badges">
+                <div class="footer-badge">
+                    <img src="pku-logo.png" alt="北京大学" class="badge-icon-img">
+                    <span>北京大学<br>技术支持</span>
+                </div>
+                <div class="footer-badge">
+                    <div class="badge-icon badge-shield">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <span>数据安全<br>隐私保护</span>
+                </div>
+                <div class="footer-badge">
+                    <div class="badge-icon badge-medical">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <span>辅助筛查<br>仅供参考</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js?v=3"></script>
+</body>
+</html>
