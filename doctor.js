@@ -121,21 +121,30 @@ async function loadReviewedList() {
   emptyEl.textContent = '近 30 天内暂无已复核病例';
 
   try {
-    let items = [];
-    try {
-      const json = await API.reviewList({ status: 'reviewed', days: REVIEWED_DAYS });
-      items = json.data?.items || [];
-    } catch {
-      const json = await API.reviewList({ status: 'all', days: REVIEWED_DAYS, page_size: 100 });
-      items = (json.data?.items || []).filter((item) =>
-        REVIEWED_STATUSES.has(item.status)
-      );
-    }
+    // 后端仅支持 status=pending|all，days=1|7|0（不支持 30、reviewed）
+    const json = await API.reviewList({ status: 'all', days: 0, page_size: 100 });
+    const items = (json.data?.items || [])
+      .filter((item) => isReviewedItem(item))
+      .filter((item) => isWithinLastDays(item.reviewed_at || item.created_at, REVIEWED_DAYS))
+      .sort((a, b) => new Date(b.reviewed_at || b.created_at) - new Date(a.reviewed_at || a.created_at));
 
     renderReviewedItems(items, listEl, emptyEl);
   } catch (error) {
     handleListError(error, emptyEl);
   }
+}
+
+function isReviewedItem(item) {
+  if (item.status) return REVIEWED_STATUSES.has(item.status);
+  // 部分后端不在 list 里返回 status，用复核字段判断
+  return Boolean(item.reviewed_at || item.doctor_label || item.review_action);
+}
+
+function isWithinLastDays(dateStr, days) {
+  if (!dateStr) return true;
+  const time = new Date(dateStr).getTime();
+  if (Number.isNaN(time)) return true;
+  return time >= Date.now() - days * 24 * 60 * 60 * 1000;
 }
 
 function renderPendingItems(items, listEl, emptyEl) {
