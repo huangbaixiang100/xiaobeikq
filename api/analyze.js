@@ -1,50 +1,51 @@
 // Vercel Serverless Function
 const fetch = require('node-fetch');
-const FormData = require('form-data');
 const getRawBody = require('raw-body');
 
-module.exports = async (req, res) => {
-  // 设置CORS头，避免浏览器报跨域或 Failed to fetch
+async function readRequestBody(req) {
+  if (req.body !== undefined && req.body !== null) {
+    if (Buffer.isBuffer(req.body)) return req.body;
+    if (typeof req.body === 'string') return Buffer.from(req.body);
+  }
+  return getRawBody(req, {
+    length: req.headers['content-length'],
+    limit: '12mb',
+  });
+}
+
+async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS, GET');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization');
   res.setHeader('Access-Control-Max-Age', '86400');
 
-  // 处理 OPTIONS 请求
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return;
   }
 
-  // 只允许 POST 请求
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
     return;
   }
 
   try {
-    // 获取原始请求体（保持 Content-Type 含 boundary 直接转发）
-    const rawBody = await getRawBody(req);
+    const rawBody = await readRequestBody(req);
     const contentType = req.headers['content-type'] || 'application/octet-stream';
 
-    // 转发请求到实际的API
     const API_URL = 'http://60.28.106.46:15025/api/v1/analyze';
-    
-    // 获取查询参数
+
     const save_image_flag = req.query.save_image_flag === 'true';
     const include_heatmap = req.query.include_heatmap === 'true';
     const apiUrl = `${API_URL}?save_image_flag=${save_image_flag}&include_heatmap=${include_heatmap}`;
 
-    console.log('Forwarding request to:', apiUrl);
-    console.log('Content-Type:', req.headers['content-type']);
-
-    // 转发请求，保持原始的 content-type 和 body
     const response = await fetch(apiUrl, {
       method: 'POST',
       body: rawBody,
       headers: {
-        'Content-Type': contentType
-      }
+        'Content-Type': contentType,
+        'Content-Length': String(rawBody.length),
+      },
     });
 
     if (!response.ok) {
@@ -53,17 +54,21 @@ module.exports = async (req, res) => {
       throw new Error(`API responded with status ${response.status}: ${errorText}`);
     }
 
-    // 获取响应数据
     const data = await response.json();
-
-    // 返回响应
     res.status(response.status).json(data);
   } catch (error) {
     console.error('Proxy error:', error);
-    res.status(500).json({ 
-      error: 'Internal server error', 
+    res.status(500).json({
+      error: 'Internal server error',
       details: error.message,
-      stack: error.stack 
     });
   }
+}
+
+handler.config = {
+  api: {
+    bodyParser: false,
+  },
 };
+
+module.exports = handler;

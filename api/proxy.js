@@ -3,7 +3,23 @@ const getRawBody = require('raw-body');
 
 const BACKEND = 'http://60.28.106.46:15025';
 
-module.exports = async (req, res) => {
+async function readRequestBody(req) {
+  const contentType = req.headers['content-type'] || '';
+  const isMultipart = contentType.includes('multipart/form-data');
+
+  if (Buffer.isBuffer(req.body) && req.body.length) return req.body;
+  if (typeof req.body === 'string' && req.body.length) return Buffer.from(req.body);
+  if (!isMultipart && req.body && typeof req.body === 'object') {
+    return Buffer.from(JSON.stringify(req.body));
+  }
+
+  return getRawBody(req, {
+    length: req.headers['content-length'],
+    limit: isMultipart ? '12mb' : '2mb',
+  });
+}
+
+async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization');
@@ -33,8 +49,11 @@ module.exports = async (req, res) => {
     const init = { method: req.method, headers };
 
     if (req.method !== 'GET' && req.method !== 'HEAD') {
-      const rawBody = await getRawBody(req);
-      if (rawBody.length) init.body = rawBody;
+      const rawBody = await readRequestBody(req);
+      if (rawBody.length) {
+        init.body = rawBody;
+        headers['Content-Length'] = String(rawBody.length);
+      }
     }
 
     const response = await fetch(url, init);
@@ -59,4 +78,13 @@ module.exports = async (req, res) => {
       },
     });
   }
+}
+
+// 必须挂在 handler 上再导出，否则 bodyParser:false 不生效，multipart 会丢失
+handler.config = {
+  api: {
+    bodyParser: false,
+  },
 };
+
+module.exports = handler;

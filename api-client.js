@@ -1,7 +1,15 @@
+const BACKEND_DIRECT = 'http://60.28.106.46:15025';
+
+/** 本地 vercel dev 对 multipart 代理有 bug，上传直连后端（后端已配 CORS） */
+function isLocalDev() {
+  const h = window.location.hostname;
+  return h === 'localhost' || h === '127.0.0.1';
+}
+
 /** 同源 /api/v1 经 Vercel 代理到后端；本地 file:// 可改为完整地址 */
 const API_BASE = (() => {
   if (window.location.protocol === 'file:') {
-    return 'http://60.28.106.46:15025';
+    return BACKEND_DIRECT;
   }
   return '';
 })();
@@ -47,7 +55,13 @@ async function parseResponse(res) {
   }
   if (!res.ok) {
     const err = body?.detail || body;
-    const msg = err?.message || err?.detail || `请求失败 (${res.status})`;
+    let msg = err?.message || err?.detail;
+    // FastAPI 422 校验错误：detail 是数组
+    if (!msg && Array.isArray(err)) {
+      msg = err.map((e) => e.msg || e.message).filter(Boolean).join('；');
+    }
+    if (!msg && typeof err === 'string') msg = err;
+    if (!msg) msg = `请求失败 (${res.status})`;
     const error = new Error(msg);
     error.status = res.status;
     error.code = err?.error_code;
@@ -92,11 +106,15 @@ const API = {
   async uploadCase(file) {
     const fd = new FormData();
     fd.append('file', file);
-    return apiRequest('/cases/upload', {
+    const uploadUrl = isLocalDev()
+      ? `${BACKEND_DIRECT}/api/v1/cases/upload`
+      : `${API_V1}/cases/upload`;
+    const res = await fetch(uploadUrl, {
       method: 'POST',
       headers: { ...Auth.authHeaders() },
       body: fd,
     });
+    return parseResponse(res);
   },
 
   async getCase(caseId) {
