@@ -2,6 +2,10 @@
   "version": 2,
   "routes": [
     {
+      "src": "/api/v1/(.*)",
+      "dest": "/api/proxy?path=$1"
+    },
+    {
       "src": "/api/analyze",
       "methods": ["POST", "OPTIONS"],
       "dest": "/api/analyze.js"
@@ -9,6 +13,10 @@
   ],
   "functions": {
     "api/analyze.js": {
+      "memory": 1024,
+      "maxDuration": 60
+    },
+    "api/proxy.js": {
       "memory": 1024,
       "maxDuration": 60
     }

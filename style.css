@@ -1134,3 +1134,415 @@ body {
         font-size: 0.75rem;
     }
 }
+
+/* ===== 账号导航 ===== */
+.nav-auth {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 12px;
+}
+
+.nav-menu .nav-auth {
+    list-style: none;
+}
+
+.btn-nav {
+    padding: 6px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--text-dark);
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.btn-nav:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.btn-nav-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+}
+
+.btn-nav-primary:hover {
+    background: var(--primary-dark);
+    color: var(--white);
+}
+
+.btn-nav-doctor {
+    border-color: #2E7D32;
+    color: #2E7D32;
+}
+
+.nav-user-greeting {
+    font-size: 0.85rem;
+    color: var(--text-medium);
+    margin-right: 4px;
+}
+
+/* ===== 弹窗 / 表单 ===== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.modal-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 28px;
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: var(--shadow-lg);
+}
+
+.modal-card-wide {
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-light);
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: var(--text-medium);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.form-error {
+    color: var(--error);
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+}
+
+.form-success {
+    color: var(--success);
+    font-size: 0.85rem;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 0.9rem;
+    color: var(--text-medium);
+}
+
+.link-btn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: underline;
+}
+
+.btn-sm {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+}
+
+/* ===== 复核状态 ===== */
+.review-status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.review-status-badge.pending {
+    background: #FFF3E0;
+    color: #E65100;
+}
+
+.review-status-badge.done {
+    background: #E8F5E9;
+    color: #2E7D32;
+}
+
+.case-id-text {
+    font-family: monospace;
+    font-size: 0.85rem;
+    word-break: break-all;
+}
+
+.doctor-report-section {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px dashed #eee;
+}
+
+.doctor-report-section h4 {
+    margin-bottom: 10px;
+    color: #2E7D32;
+}
+
+.report-meta {
+    color: var(--text-medium);
+    font-size: 0.9rem;
+    margin: 4px 0;
+}
+
+.report-note {
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    margin-top: 8px;
+}
+
+.poll-status-text {
+    margin-top: 12px;
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+/* ===== 我的报告 ===== */
+.my-reports-section {
+    padding: 48px 0;
+    background: var(--white);
+}
+
+.my-reports-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.report-card {
+    background: var(--bg-page);
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: var(--shadow-sm);
+}
+
+.report-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.report-status {
+    font-size: 0.8rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background: #eee;
+}
+
+.report-status.status-archived,
+.report-status.status-confirmed,
+.report-status.status-corrected {
+    background: #E8F5E9;
+    color: #2E7D32;
+}
+
+.report-status.status-pending_review {
+    background: #FFF3E0;
+    color: #E65100;
+}
+
+.report-date {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.my-reports-empty {
+    text-align: center;
+    color: var(--text-light);
+    padding: 24px;
+}
+
+/* ===== 医生端 ===== */
+.doctor-page {
+    background: var(--bg-page);
+}
+
+.doctor-login-section {
+    padding: 60px 0;
+}
+
+.doctor-login-card {
+    max-width: 400px;
+    margin: 0 auto;
+    background: var(--white);
+    padding: 32px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+}
+
+.doctor-login-desc {
+    color: var(--text-medium);
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.doctor-work-section {
+    padding: 32px 0 60px;
+}
+
+.doctor-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.pending-badge {
+    background: var(--error);
+    color: white;
+    font-size: 0.85rem;
+    padding: 2px 10px;
+    border-radius: 12px;
+    margin-left: 8px;
+}
+
+.doctor-filters {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.doctor-filters select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.review-list-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--white);
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.review-thumb {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.review-list-info {
+    flex: 1;
+}
+
+.review-list-meta {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.review-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 16px;
+}
+
+.review-image-panel img {
+    width: 100%;
+    border-radius: 8px;
+    max-height: 360px;
+    object-fit: contain;
+    background: #f5f5f5;
+}
+
+.review-ai-info {
+    margin-top: 12px;
+    font-size: 0.9rem;
+}
+
+.review-ai-info ul {
+    margin-top: 8px;
+    padding-left: 20px;
+}
+
+.review-meta {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+}
+
+.review-correct-box {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px dashed #eee;
+}
+
+.review-correct-box h4 {
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .nav-auth {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-left: 0;
+        margin-top: 12px;
+    }
+
+    .review-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .review-list-item {
+        flex-wrap: wrap;
+    }
+}
